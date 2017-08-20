@@ -90,8 +90,8 @@ const qTodos = {
 
 const mAddTodo ={
     query:gql `
-        mutation{
-            addTodo(name:"我不在的時候，是否有想起我？"){
+        mutation ($name:String!){
+            addTodo(name:$name){
                 ...allAttr                
             }
         }
@@ -100,7 +100,11 @@ const mAddTodo ={
     config:{
         props: ({ mutate }) => {
             return {
-                addTodo: () => mutate(),
+                addTodo: (name) => mutate({
+                    variables: {
+                        name
+                    },
+                }),
             }
         }
     }
