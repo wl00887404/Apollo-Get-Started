@@ -7,6 +7,9 @@ import {
     compose
 } from 'react-apollo'
 
+import {connect} from 'react-redux'
+import {setVisibilityFilter} from '../../Action'
+
 let filter = [{
         id: "all",
         name: "全部"
@@ -39,7 +42,9 @@ class Page extends Component {
         let {
             addTodo,
             removeTodo,
-            toggleFinished
+            toggleFinished,
+            visibilityFilter,
+            setVisibilityFilter
         } = this.props
 
         let {
@@ -50,12 +55,31 @@ class Page extends Component {
             todos
         } = this.props.data
 
+        if(todos!==undefined){
+            todos = todos
+                .filter(({
+                    finished
+                }) => {
+                    switch (visibilityFilter) {
+                        case "all":
+                            return true
+                        case "finished":
+                            return finished === true
+                        case "unfinished":
+                            return finished === false
+                        default:
+                            return true
+                    }
+                })
+        }
+
         return (
             <div>
                 <Hero title={"Lovely Todo List"} subtitle={"事情永遠做不完"}>
                     <Tabs 
                         items={filter} 
-                        selected={"all"} />
+                        selected={visibilityFilter}
+                        onClick={setVisibilityFilter} />
                 </Hero>
                 <Container>
                         <InputHasAddons
@@ -204,9 +228,27 @@ const mToggleFinished = {
 }
 
 
-export default compose(
+const PageWithData= compose(
     graphql(qTodos.query),
     graphql(mAddTodo.query,mAddTodo.config),
     graphql(mRemovewTodo.query,mRemovewTodo.config),
     graphql(mToggleFinished.query,mToggleFinished.config),    
 )(Page)
+
+
+const mapStore = ({
+    visibilityFilter
+}) => {
+    return {
+        visibilityFilter
+    }
+}
+const mapDispatch = (dispatch) => {
+    return {
+        setVisibilityFilter: (filter) => {
+            dispatch(setVisibilityFilter(filter))
+        },
+    }
+}
+
+export default connect(mapStore, mapDispatch)(PageWithData)
