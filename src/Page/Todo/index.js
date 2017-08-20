@@ -37,7 +37,9 @@ class Page extends Component {
 
     render() {
         let {
-            addTodo
+            addTodo,
+            removeTodo,
+            toggleFinished
         } = this.props
 
         let {
@@ -61,7 +63,9 @@ class Page extends Component {
                             value={name}
                             onSubmit={addTodo}/>
                         <TodosTable 
-                            todos={todos} />
+                            todos={todos} 
+                            remove={removeTodo}
+                            toggle={toggleFinished} />
                 </Container>
             </div>
         )
@@ -104,13 +108,79 @@ const mAddTodo ={
                     variables: {
                         name
                     },
+                    update: (store, response) => {
+                        let data = store.readQuery({
+                            query: qTodos.query
+                        })
+                        data.todos.push(response.data.addTodo)
+                        store.writeQuery({
+                            query: qTodos.query,
+                            data
+                        })
+                    },
                 }),
             }
         }
     }
 }
 
+const mRemovewTodo = {
+    query: gql `
+        mutation ($id:Int!){
+            removeTodo(id:$id){
+                id
+            }
+        }  
+    `,
+    config:{
+        props: ({ mutate }) => {
+            return {
+                removeTodo: (id) => mutate({
+                    variables: {
+                        id
+                    },
+                    update: (store, response) => {
+                        let data = store.readQuery({
+                            query: qTodos.query
+                        })
+                        data.todos = data.todos.filter(todo => todo.id !== response.data.removeTodo.id)
+                        store.writeQuery({
+                            query: qTodos.query,
+                            data
+                        })
+                    },
+                }),
+            }
+        }
+    }
+}
+
+const mToggleFinished = {
+    query: gql `
+        mutation ($id:Int!){
+            toggleFinished(id:$id){
+                id
+                finished
+            }
+        }
+    `,
+    config:{
+        props: ({ mutate }) => {
+            return {
+                toggleFinished: (id) => mutate({
+                    variables: {
+                        id
+                    },
+                }),
+            }
+        }
+    }
+}
+
+
 export default compose(
     graphql(qTodos.query),
     graphql(mAddTodo.query,mAddTodo.config),
+    graphql(mRemovewTodo.query,mRemovewTodo.config),
+    graphql(mToggleFinished.query,mToggleFinished.config),    
 )(Page)
