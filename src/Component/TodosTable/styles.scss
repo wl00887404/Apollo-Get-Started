@@ -1,0 +1,31 @@
+.todos {
+    overflow: auto;
+    th {
+        &:nth-child(1) {
+            width: 15%;
+        }
+        &:nth-child(2) {
+            width: 75%;
+            min-width: 20em;
+        }
+        &:nth-child(3) {
+            width: 10%;
+        }
+    }
+    td {
+        &:nth-child(1) {
+            letter-spacing: 0.2em;
+        }
+        &:nth-child(2){
+            .tag{
+                background-color: transparent;
+            }
+            .delete{
+                margin-left: 0.5em;
+                &:hover{
+                    background-color: #ff3860;
+                }
+            }
+        }
+    }
+}

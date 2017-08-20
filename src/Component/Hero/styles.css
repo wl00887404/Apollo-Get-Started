@@ -1,0 +1,12 @@
+.nav-item .logo {
+  cursor: default;
+  max-height: 3rem; }
+
+.hero-body {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem; }
+  .hero-body .title {
+    margin-bottom: 2.4rem; }
+  .hero-body .title,
+  .hero-body .subtitle {
+    cursor: default; }

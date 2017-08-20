@@ -1,0 +1,17 @@
+.todos {
+  overflow: auto; }
+  .todos th:nth-child(1) {
+    width: 15%; }
+  .todos th:nth-child(2) {
+    width: 75%;
+    min-width: 20em; }
+  .todos th:nth-child(3) {
+    width: 10%; }
+  .todos td:nth-child(1) {
+    letter-spacing: 0.2em; }
+  .todos td:nth-child(2) .tag {
+    background-color: transparent; }
+  .todos td:nth-child(2) .delete {
+    margin-left: 0.5em; }
+    .todos td:nth-child(2) .delete:hover {
+      background-color: #ff3860; }

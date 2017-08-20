@@ -1,0 +1,36 @@
+{
+    "name": "Apollo_Get_Started",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "bulma": "^0.5.1",
+        "casual": "^1.5.14",
+        "chalk": "^2.1.0",
+        "cors": "^2.8.4",
+        "express": "^4.15.4",
+        "express-graphql": "^0.6.7",
+        "method-override": "^2.3.9",
+        "node-fetch": "^1.7.2",
+        "node-sass-chokidar": "^0.0.3",
+        "npm-run-all": "^4.0.2",
+        "prop-types": "^15.5.10",
+        "react": "^15.6.1",
+        "react-apollo": "^1.4.14",
+        "react-dom": "^15.6.1",
+        "react-redux": "^5.0.6",
+        "react-router-dom": "^4.1.2",
+        "react-scripts": "1.0.11",
+        "redux": "^3.7.2",
+        "redux-thunk": "^2.2.0"
+    },
+    "scripts": {
+        "build-css": "node-sass-chokidar src/ -o src/",
+        "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+        "start-js": "PORT=8080 react-scripts start",
+        "start": "npm-run-all -p watch-css start-js",
+        "build": "npm run build-css && react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "server":"node server"
+    }
+}
