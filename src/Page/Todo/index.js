@@ -118,6 +118,16 @@ const mAddTodo ={
                             data
                         })
                     },
+                    optimisticResponse: {
+                        __typename: 'Mutation',
+                        addTodo: {
+                            id: -1*Math.round(Math.random()*1000),
+                            __typename: 'Todo',
+                            name,
+                            createAt:`${(new Date()).getFullYear()}/${(new Date()).getMonth()+1}/${(new Date()).getDate()}`,
+                            finished:false
+                        }
+                    }
                 }),
             }
         }
@@ -149,6 +159,13 @@ const mRemovewTodo = {
                             data
                         })
                     },
+                    optimisticResponse: {
+                        __typename: 'Mutation',
+                        removeTodo: {
+                            id,
+                            __typename: 'Todo',
+                        }
+                    }
                 }),
             }
         }
@@ -165,12 +182,21 @@ const mToggleFinished = {
         }
     `,
     config:{
-        props: ({ mutate }) => {
+        props: ({ ownProps,mutate }) => {
+            const getTodoById=(id)=>ownProps.data.todos.filter(todo=>todo.id===id)[0]
             return {
                 toggleFinished: (id) => mutate({
                     variables: {
                         id
                     },
+                    optimisticResponse: {
+                        __typename: 'Mutation',
+                        toggleFinished: {
+                            id,
+                            __typename: 'Todo',
+                            finished:!getTodoById(id).finished
+                        }
+                    }
                 }),
             }
         }
