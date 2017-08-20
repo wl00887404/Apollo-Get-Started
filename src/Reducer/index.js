@@ -2,6 +2,17 @@ export const todos = (state = [], action) => {
     switch (action.type) {
         case "getTodos":
             return action.todos
+        case "updateTodoId":
+            {
+                let { oldId, newId } = action
+                return state.map(el => Object.assign({}, el))
+                    .map(el => {
+                        if (el.id === oldId) {
+                            el.id = newId
+                        }
+                        return el
+                    })
+            }
         case "addTodo":
             {
                 let {

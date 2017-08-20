@@ -40,6 +40,16 @@ export const fetchTodos = () => {
 
 export const addTodo = (name) => {
     return (dispatch, getState) => {
+        let id = "#"+Math.round(Math.random()*1000)
+        let createAt = `${(new Date()).getFullYear()}/${(new Date()).getMonth()+1}/${(new Date()).getDate()}`
+        let finished=false
+        let todo={id, createAt, finished, name}
+
+        dispatch({
+            type: "addTodo",
+            todo
+        })
+
         fetch.addTodo(name)
             .then((res) => {
                 if(res.errors){
@@ -47,13 +57,18 @@ export const addTodo = (name) => {
                 }
                 else {
                     dispatch({
-                        type: "addTodo",
-                        todo:res.data.addTodo
+                        type: "updateTodoId",
+                        oddId:id,
+                        newId:res.data.addTodo.id
                     })
                     dispatch(finishLoading())
                 }
             })
             .catch(e => {
+                dispatch({
+                    type: "removeTodo",
+                    id
+                })
                 dispatch(finishLoading())
             })
     }
@@ -61,20 +76,26 @@ export const addTodo = (name) => {
 
 export const removeTodo = (id) => {
     return (dispatch, getState) => {
+        let todo = getState().todos.filter(todo => todo.id === id)[0]
+
+        dispatch({
+            type: "removeTodo",
+            id
+        })
+
         fetch.removeTodo(id)
             .then((res) => {
-                if(res.errors){
+                if (res.errors) {
                     throw res
-                }
-                else {
-                    dispatch({
-                        type: "removeTodo",
-                        id
-                    })
+                } else {
                     dispatch(finishLoading())
                 }
             })
             .catch(e => {
+                dispatch({
+                    type: "addTodo",
+                    todo
+                })
                 dispatch(finishLoading())
             })
     }
