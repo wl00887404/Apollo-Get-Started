@@ -3,7 +3,8 @@ import { Hero, Tabs, InputHasAddons, Container, TodosTable } from '../../Compone
 
 import {
     gql,
-    graphql
+    graphql,
+    compose
 } from 'react-apollo'
 
 let filter = [{
@@ -36,6 +37,10 @@ class Page extends Component {
 
     render() {
         let {
+            addTodo
+        } = this.props
+
+        let {
             name
         } = this.state
 
@@ -53,7 +58,8 @@ class Page extends Component {
                 <Container>
                         <InputHasAddons
                             onChange={this.onChange.bind(this)}
-                            value={name} />
+                            value={name}
+                            onSubmit={addTodo}/>
                         <TodosTable 
                             todos={todos} />
                 </Container>
@@ -75,4 +81,27 @@ const qTodos = {
     `
 }
 
-export default graphql(qTodos.query)(Page)
+const mAddTodo ={
+    query:gql `
+        mutation{
+            addTodo(name:"我不在的時候，是否有想起我？"){
+                id
+                name
+                createAt
+                finished
+            }
+        }    
+    `,
+    config:{
+        props: ({ mutate }) => {
+            return {
+                addTodo: () => mutate(),
+            }
+        }
+    }
+}
+
+export default compose(
+    graphql(qTodos.query),
+    graphql(mAddTodo.query,mAddTodo.config),
+)(Page)
