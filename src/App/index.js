@@ -1,27 +1,23 @@
 import React, {Component} from 'react';
 // eslint-disable-next-line 
 import bulma from "bulma/css/bulma.css"
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
-import {Provider} from 'react-redux'
-import {todos,visibilityFilter,loading} from '../Reducer'
+import {ApolloProvider, ApolloClient, createNetworkInterface} from 'react-apollo'
 import {Todo} from '../Page'
 
-let store = createStore(
-    combineReducers({todos, visibilityFilter,loading}),
-    {},
-    compose(
-        applyMiddleware(thunk),
-        (typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined') ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
-    )
-)
+const networkInterface = createNetworkInterface({
+    uri:'http://localhost:8081/graphql'
+})
+
+const client = new ApolloClient({
+    networkInterface
+})
 
 class App extends Component {
     render() {
         return (
-            <Provider store={store}>
-                <Todo />
-            </Provider>
+            <ApolloProvider client={client}> 
+				<Todo />
+            </ApolloProvider> 
         )
     }
 }
