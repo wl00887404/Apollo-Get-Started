@@ -68,16 +68,23 @@ class Page extends Component {
     }
 }
 
+const fAllAttr=gql `
+    fragment allAttr on Todo{
+        id
+        createAt
+        name
+        finished
+    }
+`
+
 const qTodos = {
     query: gql `
         query {
             todos{
-                id
-                name
-                createAt
-                finished
+                ...allAttr
             }
         }
+        ${fAllAttr}
     `
 }
 
@@ -85,12 +92,10 @@ const mAddTodo ={
     query:gql `
         mutation{
             addTodo(name:"我不在的時候，是否有想起我？"){
-                id
-                name
-                createAt
-                finished
+                ...allAttr                
             }
-        }    
+        }
+        ${fAllAttr}               
     `,
     config:{
         props: ({ mutate }) => {
