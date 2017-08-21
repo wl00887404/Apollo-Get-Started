@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>PPT</title>
+
+    <link rel="stylesheet" href="./css/reveal.css">
+    <link rel="stylesheet" href="./css/theme/white.css">
+    <link rel="stylesheet" href="./lib/css/zenburn.css">
+
+    <style>
+        * {
+            text-transform: none!important;
+        }
+		img{
+            border: none!important;
+			box-shadow: 5px 5px 30px 5px rgba(0,0,0,0.6)!important;			
+		}
+		
+		#logo{
+			box-shadow: none!important;
+			
+		}
+        #photo {
+            max-width: 20%;
+            border-radius: 50%;
+			box-shadow: none!important;
+		}
+
+        #link img {
+            width: 10%;
+            border-radius: 50%;
+			box-shadow: none!important;			
+        }
+
+		#diy h2,#thx h2{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#diy img,#thx img{
+			width: 1em;
+			margin:0;
+			margin-left: 0.8em;
+			box-shadow: none!important;
+			animation: heart 0.6s infinite;
+		}
+		.reveal a:hover img{
+			box-shadow: none!important;			
+		}
+		@keyframes heart {
+  0% {
+    transform: scale(1); }
+  25% {
+    transform: scale(1.5); }
+  50% {
+    transform: scale(1); } }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section>
+					<img id="logo" src="http://www.benmvp.com/slides/img/nav-react/apollo-logo-dark.svg">
+                </section>
+                <section>
+                    <h2>Presenter</h2>
+                    <h3>政治</h3>
+                    <img id="photo" src="https://scontent.fkhh1-2.fna.fbcdn.net/v/t1.0-9/19366426_1570568816300681_6860427109623634434_n.jpg?oh=304964af12999cb643874ed9c127aa25&oe=5A18CA6F" />
+                    <div id="link">
+                        <a href="https://www.facebook.com/he.z.min.1">
+								<img src="https://image.flaticon.com/icons/svg/145/145802.svg" />
+							</a>
+                        <a href="mailto:wl00887404@gmail.com">
+								<img src="https://image.flaticon.com/icons/svg/190/190727.svg" />
+							</a>
+                        <a href="https://github.com/wl00887404">
+								<img src="http://www.freeiconspng.com/uploads/git-github-hub-icon-25.png" />
+							</a>
+                        <a href="https://codepen.io/wl00887404/">
+								<img src="http://blog.codepen.io/wp-content/uploads/2012/06/Button-Black-Large.png" />
+							</a>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section data-markdown>
+                    ## 先來簡介一下 GraphQL
+                </section>
+                <section data-markdown>
+                    ## 應該用過 REST API
+                </section>
+                <section data-markdown>
+					## REST API 很好、很強
+					## 但還是有一些缺點
+                </section>
+                <section data-markdown>
+					+ 參數、回傳值型別不固定 
+					+ 多版本時，前後端常不匹配 
+					+ 會拿多餘的欄位 + 不容易處理巢狀資源 
+					+ 會不斷成長的 Endpoint 數量
+					
+					[參考資料：http://ithel...188294](http://ithelp.ithome.com.tw/articles/10188294)
+                </section>
+                <section data-markdown>
+					## 總而言之 
+					## GraphQL是一個
+					## 很新、對前端友善的 API
+                </section>
+                <section data-markdown>
+                    ## 語法我們後面再說吧
+                </section>
+            </section>
+            <section>
+                <section data-markdown>
+                    ## 那 Apollo 是什麼呢？
+                </section>
+                <section data-markdown>
+					## 一個
+					## 可以跟 GraphQL 溝通的 Client
+				</section>
+                <section data-markdown>
+					#### 架構大概像這樣
+					
+					![](https://cdn-images-1.medium.com/max/1200/1*_2BxhMhdozoM_oN1VruLsA.png)
+				</section>
+				<section data-markdown>
+					#### 再看細一點
+
+					![](https://cdn-images-1.medium.com/max/1140/1*W7ColK8Ru_TG1Rs5cnlmJQ.png)					
+				</section>
+                <section data-markdown>
+					## 除了接資料以外
+					## 還有很多優點
+					## 我們一邊動手一邊說吧
+				</section>
+			</section>
+            <section>
+				<section data-markdown>
+					## 來寫一個 Todo List 吧
+					#### 簡單、輕鬆、 ~~每次都寫這個~~
+				</section>
+				<section data-markdown>
+					## [Clone this](https://github.com/wl00887404/Apollo_Get_Started)
+
+					```bash
+					git clone https://github.com/wl00887404/Apollo_Get_Started
+					cd Apollo_Get_Started
+					git checkout 6701ffae5613f7aef43857511e911fdb31261344
+					npm install 
+					```
+				</section>
+				<section data-markdown>
+					## [Server](http://localhost:8081/)
+					### Port: 8081
+					
+					```bash
+					npm run server
+					```
+				</section>
+				<section data-markdown>
+					## [Client](http://localhost:8080/)
+					### Port: 8080
+
+					```bash
+					npm run start
+					```
+				</section>
+				<section data-markdown>
+					## 另外
+					## 你可以在 [Commits](https://github.com/wl00887404/Apollo_Get_Started/commits/master)
+					## 看到每一次的改動
+				</section>				
+				<section data-markdown>
+					![](./commit.png)
+				</section>
+				<section  id="diy">
+					<h2>那我們開始吧<img src="https://image.flaticon.com/icons/svg/148/148836.svg" /></h2> 
+				</section>
+			</section>
+            <section>
+				<section data-markdown>
+					## 我所提及的
+					+ Query 、 Mutation
+					+ Fragment 、 Variable
+					+ Update
+					+ Optimistic UI
+				</section>
+				<section data-markdown>
+					## 你可能有興趣的
+					+ Pagination 
+					+ Polling 、 Subscription
+					+ Prefetch
+					+ SSR
+				</section>
+				<section data-markdown>
+					## 總結
+					+ 我覺得很棒
+					+ 用起來就跟 `Redux` 差不多
+				</section>
+				<section data-markdown>
+					# Q & A
+				</section>
+				<section  id="thx">
+					<h2> Thank you for your listening<img src="https://image.flaticon.com/icons/svg/148/148836.svg" /> </h2>
+					<h4>可以的話，希望各位可以幫忙填個<a href="https://docs.google.com/forms/d/e/1FAIpQLScKNlzjdeB0X4A68Mal97ZysWeQLIb4-WMk6hK-Ldjzdy5k5Q/viewform?usp=sf_link">問卷</a></h4> 
+				</section>
+			</section>
+		</div>
+    </div>
+
+    <script src="./lib/js/head.min.js"></script>
+    <script src="./js/reveal.js"></script>
+
+    <script>
+        Reveal.initialize({
+            dependencies: [{
+                    src: 'plugin/markdown/marked.js'
+                },
+                {
+                    src: 'plugin/markdown/markdown.js'
+                },
+                {
+                    src: 'plugin/notes/notes.js',
+                    async: true
+                },
+                {
+                    src: 'plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                }
+            ]
+        });
+    </script>
+</body>
+
+</html>
