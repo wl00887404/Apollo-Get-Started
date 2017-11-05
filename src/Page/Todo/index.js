@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Hero, Tabs, InputHasAddons, Container, TodosTable } from '../../Component'
-
+import gql from 'graphql-tag'
 import {
-    gql,
     graphql,
     compose
 } from 'react-apollo'
