@@ -1,5 +1,8 @@
 # Apollo_Get_Started
 
+## Video
+[https://www.youtube.com/watch?v=vpfBVnii88Q](https://www.youtube.com/watch?v=vpfBVnii88Q)
+
 ## PPT
 [https://wl00887404.github.io/Apollo-Get-Started](https://wl00887404.github.io/Apollo-Get-Started)
 
